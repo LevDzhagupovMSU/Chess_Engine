@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тихий ход — шахматы</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel">
+        <div class="panel-heading">
+          <p class="eyebrow">Chess · 01</p>
+          <h1>Тихий ход</h1>
+          <p class="subtitle">Партия против движка. Подключитесь к серверу и сделайте первый ход белыми.</p>
+        </div>
+
+        <div class="controls">
+          <label for="ws-url">Адрес WebSocket</label>
+          <input id="ws-url" type="text" value="ws://127.0.0.1:8080" />
+          <div class="buttons">
+            <button id="connect-btn" class="primary">Подключиться</button>
+            <button id="new-game-btn" class="secondary">Новая партия</button>
+          </div>
+        </div>
+
+        <div class="players-card">
+          <div class="player-row active-player" id="white-player">
+            <span class="player-piece white-piece">♔</span>
+            <span><strong>Вы</strong><small>Белые</small></span>
+            <span class="player-turn" aria-hidden="true"></span>
+          </div>
+          <div class="player-row" id="black-player">
+            <span class="player-piece black-piece">♚</span>
+            <span><strong>Движок</strong><small>Чёрные</small></span>
+            <span class="player-turn" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="status-card">
+          <div class="status-row">
+            <span class="label">Статус</span>
+            <span id="status" class="value offline">Оффлайн</span>
+          </div>
+          <div class="status-row">
+            <span class="label">Ход</span>
+            <span id="turn" class="value">Белые</span>
+          </div>
+          <div class="status-row last">
+            <span class="label">Последнее</span>
+            <span id="last-action" class="value muted">Пока нет ходов</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="board-section">
+        <div class="board-shell">
+          <div class="board-toolbar">
+            <div>
+              <p class="eyebrow">Текущая позиция</p>
+              <h2>Шахматная доска</h2>
+            </div>
+            <div class="turn-badge"><span class="turn-dot"></span><span id="turn-badge">Белые</span></div>
+          </div>
+          <div class="board-frame">
+            <div id="board" class="board" aria-label="Шахматная доска"></div>
+          </div>
+          <div class="board-footer">
+            <p class="board-hint">Выберите фигуру, затем клетку назначения</p>
+            <span class="coordinate-note">Белые внизу · 1—8 / a—h</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="move-history" aria-labelledby="history-title">
+        <div class="history-heading">
+          <p class="eyebrow">Партия</p>
+          <h2 id="history-title">История ходов</h2>
+        </div>
+        <div class="history-columns" aria-hidden="true">
+          <span>№</span><span>Белые</span><span>Чёрные</span>
+        </div>
+        <ol id="move-history" class="history-list" aria-live="polite" aria-relevant="additions"></ol>
+        <p id="history-empty" class="history-empty">Ходы появятся здесь</p>
+      </aside>
+    </main>
+
+    <script src="client.js"></script>
+  </body>
+</html>
